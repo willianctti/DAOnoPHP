@@ -1,0 +1,100 @@
+O que é DAO?
+
+DAO = Data Access Object;
+
+Padrão de código utilizado para persitência de dados
+utilizada apenas em abordagens orientadas a objetos
+Há uma classe DAO que será responsável pelas interações ao DB
+Atua como um intermedário de aplicação e banco de dados
+Separa a regra de neg´coio da interação com o banco de dados
+Possibilita tabém a troca de bancos ou modelo de conexão facilmente
+
+
+		DAO Na teoria
+
+Trabalharemos com duas classes
+Exemplificando com uma classe de usuário
+
+UserDAO: Manipulação de dados no banco
+User: Todas as acções que não envolvem o banco
+Create: User monta um novo usuário com seus campos necessários do banco, 
+UserDao recebe este objeto e insere o usuário no banco
+
+
+
+	Interface do DAO
+
+Normalmente também é criada uma interface para a DAO
+
+Esta interface molda a classe dao, DEFININDO seus metodos
+Desta maneira temos um esqueleto para seguir e implementar na classe
+que vai manipular o banco de dados;
+
+Os metodos principais da inTerface são pelo menos os que constituem o CRUD
+
+
+
+
+
+para testes, fiz um novo projeto. primeiramente, fiz um novo db com mysql pelo
+phpmyadmin e conectei: 
+
+<?php
+    $db = "daotest";
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+
+    $conn = new PDO("mysql:dbname=$db;host=$host", $user, $pass);
+
+
+agora, criando o DAO de fato:
+Criamos nosso objeto que servirá como "manuseio" entre user e DB:
+
+<?php
+    class Car {
+         private $id;
+         private $brand;
+         private $km;
+         private $color;
+
+        public function getId() {
+            return $this->id;
+        }
+
+        public function setId($id) {
+            $this->id = $id;
+        }
+E CRIAMOS TODAS AS FUNÇÕES DE TODOS OS MÉTODOS
+
+
+
+		Criando a classe dao E interface
+
+
+        interface CarDAO {
+            public function create(Car $car);
+            public function findAll();
+
+
+
+        }
+
+criamos uma pasta dao com o CarDAO  da interface que definimos anteriormente:
+
+<?php
+    include_once("models/Car.php");
+
+    class CarDAO implements CarDAO {
+        public function findAll() {
+
+        }
+
+        public function create(Car $car) {
+            
+        }
+    }
+
+
+Inserindo dados com DAO:
+
